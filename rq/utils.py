@@ -99,7 +99,8 @@ def import_attribute(name: str) -> Callable[..., Any]:
             module = importlib.import_module(module_name)
             break
         except ImportError:
-            attribute_bits.insert(0, module_name_bits.pop())
+            # attribute_bits.insert(0, module_name_bits.pop())
+            raise
 
     if module is None:
         # maybe it's a builtin
