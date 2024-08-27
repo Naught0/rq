@@ -116,8 +116,10 @@ def import_attribute(name: str) -> Callable[..., Any]:
     attribute_owner_name = '.'.join(attribute_bits)
     try:
         attribute_owner = getattr(module, attribute_owner_name)
-    except:  # noqa
+    except AttributeError:  # noqa
         raise ValueError('Invalid attribute name: %s' % attribute_name)
+    except Exception:
+        raise
 
     if not hasattr(attribute_owner, attribute_name):
         raise ValueError('Invalid attribute name: %s' % name)
